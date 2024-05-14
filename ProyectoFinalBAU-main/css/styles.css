@@ -1,0 +1,665 @@
+/*
+    MARK: CSS RESET
+*/
+
+/* Simplifico la forma de aplicar tamaños */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Quito el espaciado predeterminado */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Aplico dark mode user-agent-styles */
+/* Mejoro la puntuación en los navegadores que lo soporten */
+html {
+    color-scheme: dark light;
+    hanging-punctuation: first last;
+}
+
+/* min body height para evitar problemas con display:flex */
+body {
+    min-height: 100svh;
+}
+
+/* imágenes/videos responsive */
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+/* Mejoro los títulos en los navegadores que lo soporten */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+/* Mejoro la legibilidad con max-width en párrafos y listas */
+/* Prevengo palabras "huérfanas" en los navegadores que lo soporten */
+p,
+li {
+    max-width: 65ch;
+    text-wrap: pretty;
+}
+
+/* ========================================================== */
+
+/*
+    MARK: HTML
+*/
+:root {
+    --clr-primary: #121212;
+    --clr-secondary: #f2f2f2;
+    --clr-accent: green;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*
+    MARK: BODY
+*/
+body {
+    background-color: var(--clr-primary);
+    max-height: 100vh;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+/*
+    MARK: HEADER
+*/
+header {
+    padding: 0.5rem;
+    grid-area: header;
+    border-bottom: 0.5rem solid var(--clr-secondary);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header > div {
+    display: flex;
+    gap: 0;
+}
+
+header > :last-child {
+    display: none;
+}
+
+/*
+    MARK: Buscador input
+*/
+#buscadorInput,
+#buscadorInput:focus {
+    width: 30rem;
+    margin: 0;
+    padding: 0.5rem;
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem 0 0 0.5rem;
+    outline: none;
+}
+
+#buscadorButton {
+    margin: 0;
+    padding: 0.5rem;
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0 0.5rem 0.5rem 0;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+}
+
+#buscadorButton:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+/*
+    MARK: MAIN
+*/
+main {
+    padding: 0.5rem;
+    grid-area: main;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 8fr 1fr 1fr;
+    grid-template-areas:
+        "productos carrito"
+        "productos total"
+        "productos comprar";
+    overflow-y: hidden;
+}
+
+/*
+    MARK: Listado productos
+*/
+#listadoProductos {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    grid-area: productos;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+#listadoProductos > li {
+    padding: 0.5rem;
+    width: 15rem;
+    height: 20rem;
+    list-style-type: none;
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#listadoProductos > li > :nth-child(2) {
+    height: 2rlh;
+}
+
+#listadoProductos > li > input {
+    padding: 0.5rem min(20%, 3rem);
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+}
+
+#listadoProductos > li > input:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+/*
+    MARK: Detalles usuario
+*/
+#detallesUsuario {
+    margin-right: 0.5rem;
+    padding: 0 0.5rem;
+    grid-area: productos;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 3fr) 1fr;
+    grid-template-areas:
+        "nombre nombre nombre apellido apellido apellido"
+        "pais pais provincia provincia ciudad ciudad"
+        "calle calle depto depto cp cp"
+        "email email email tel tel tel"
+        "titular titular titular titular titular titular"
+        "num num exp exp cvv cvv"
+        "confirmar confirmar confirmar confirmar confirmar confirmar";
+    max-width: none;
+    gap: 1rem;
+}
+
+#detallesUsuario > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#detallesUsuario > input {
+    width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+#detallesUsuario > input:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+#detallesUsuario > input:focus {
+    outline: 0.3rem solid var(--clr-accent);
+}
+
+#detallesUsuario > div > label {
+    padding-left: 0.3rem;
+}
+
+#detallesUsuario > div > input {
+    margin: 0;
+    padding: 0.3rem;
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+#detallesUsuario > div > input:focus {
+    outline: 0.3rem solid var(--clr-accent);
+}
+
+#detallesUsuario > :nth-child(1)    /*  Intencionalmente evito :first-child por si tengo que cambiar el orden */
+{
+    grid-area: nombre;
+}
+
+#detallesUsuario > :nth-child(2)
+{
+    grid-area: apellido;
+}
+
+#detallesUsuario > :nth-child(3)
+{
+    grid-area: pais;
+}
+
+#detallesUsuario > :nth-child(4)
+{
+    grid-area: provincia;
+}
+
+#detallesUsuario > :nth-child(5)
+{
+    grid-area: ciudad;
+}
+
+#detallesUsuario > :nth-child(6)
+{
+    grid-area: calle;
+}
+
+#detallesUsuario > :nth-child(7)
+{
+    grid-area: depto;
+}
+
+#detallesUsuario > :nth-child(8)
+{
+    grid-area: cp;
+}
+
+#detallesUsuario > :nth-child(9)
+{
+    grid-area: email;
+}
+
+#detallesUsuario > :nth-child(10)
+{
+    grid-area: tel;
+}
+
+#detallesUsuario > :nth-child(11)
+{
+    grid-area: titular;
+}
+
+#detallesUsuario > :nth-child(12)
+{
+    grid-area: num;
+}
+
+#detallesUsuario > :nth-child(13)
+{
+    grid-area: exp;
+}
+
+#detallesUsuario > :nth-child(14)
+{
+    grid-area: cvv;
+}
+
+#detallesUsuario > :nth-child(15)   /*  Intencionalmente evito :last-child por si tengo que cambiar el orden */
+{
+    grid-area: confirmar;
+}
+
+/*
+    MARK: Carrito productos
+*/
+#carritoProductos {
+    grid-area: carrito;
+    border-top: 0.1rem solid var(--clr-secondary);
+    border-left: 0.1rem solid var(--clr-secondary);
+    border-right: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem 0.5rem 0 0;
+    overflow-y: auto;
+}
+
+.carritoVacio {
+    display: grid;
+    place-items: center;
+}
+
+#carritoProductos > li {
+    margin-top: 1rem;
+    padding: 0.5rem 0 0 0.5rem;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 2fr 2fr 5fr 1fr;
+    grid-template-rows: 3rlh 1rlh;
+    grid-template-areas:
+        "foto nombre nombre boton"
+        "foto cantidad numero boton";
+    max-width: none;
+}
+
+#carritoProductos > li:not(:first-child) {
+    border-top: 0.1rem solid var(--clr-secondary);
+}
+
+#carritoProductos > li:last-child {
+    margin-bottom: 1rem;
+}
+
+#carritoProductos > li > :first-child {
+    grid-area: foto;
+}
+
+#carritoProductos > li > :nth-child(2) {
+    grid-area: nombre;
+}
+
+#carritoProductos > li > :nth-child(3) {
+    grid-area: cantidad;
+}
+
+#carritoProductos > li > :nth-child(4) {
+    grid-area: numero;
+    display: flex;
+    gap: 1rem;
+}
+
+#carritoProductos > li > :nth-child(4) > :first-child,
+#carritoProductos > li > :nth-child(4) > :last-child {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+}
+
+#carritoProductos > li > :nth-child(3) > :first-child:hover,
+#carritoProductos > li > :nth-child(3) > :last-child:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+#carritoProductos > li > :last-child {
+    grid-area: boton;
+    margin: 1rem;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+}
+
+#carritoProductos > li > :last-child:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+#carritoBottomBar {
+    padding: 0.5rem;
+    grid-area: total;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+#carritoBottomBar > div {
+    display: flex;
+}
+
+/*
+    MARK: Vaciar carrito
+*/
+#vaciarCarrito {
+    padding: 0.5rem 2rem;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+}
+
+#vaciarCarrito:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+/*
+    MARK: Comprar carrito
+*/
+#comprarCarrito {
+    margin-top: 0.5rem;
+    grid-area: comprar;
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 0.1rem solid var(--clr-secondary);
+    border-radius: 0.5rem;
+}
+
+#comprarCarrito:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+/*
+    MARK: FOOTER
+*/
+footer {
+    padding: 0.5rem;
+    grid-area: footer;
+    border-top: 0.5rem solid var(--clr-secondary);
+
+    display: flex;
+    justify-content: center;
+}
+
+/* 
+    MARK: MOBILE MEDIA QUERY
+ */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: x-large;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: large;
+        text-align: center;
+    }
+
+    body {
+        max-height: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        background-color: var(--clr-primary);
+        position: fixed;
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #buscadorInput,
+    #buscadorInput:focus {
+        width: 15rem;
+    }
+
+    header > :last-child {
+        display: flex;
+        width: 17rem;
+        gap: 1rem;
+    }
+
+    header > :last-child > input {
+        width: 100%;
+        height: 2rlh;
+        background-color: var(--clr-secondary);
+        color: var(--clr-primary);
+        border: 0.1rem solid var(--clr-secondary);
+        border-radius: 0.5rem;
+    }
+
+    header > :last-child > input:active {
+        background-color: var(--clr-primary);
+        color: var(--clr-secondary);
+        cursor: pointer;
+    }
+
+    main {
+        margin-top: calc(8.1rem + 4rlh); /* 2rem + altura de HEADER */
+        margin-bottom: 4rem;
+        padding: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        overflow-y: unset;
+        max-width: 95vw;
+    }
+
+    #listadoProductos {
+        margin-right: unset;
+        padding: unset;
+    
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    
+        max-height: 100%;
+        overflow-y: scroll;
+    }
+    
+    #listadoProductos > li {
+        padding: 0.5rem;
+        width: 15rem;
+        height: 20rem;
+        list-style-type: none;
+        border: 0.1rem solid var(--clr-secondary);
+        border-radius: 0.5rem;
+    
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #detallesUsuario {
+        margin-right: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: unset;
+    }
+
+    #detallesUsuario > div {
+        width: 15rem;
+    }
+
+    #detallesUsuario > div > label {
+        padding-left: unset;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #detallesUsuario > input {
+        margin-top: 1rem;
+        width: 15rem;
+        margin-left: unset;
+        margin-right: unset;
+        padding: 0.5rem;
+    }
+
+    #carritoProductos {
+        margin: 4rem 0.5rem 0 0.5rem;
+        overflow-y: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Cuando NO hay ningún hijo en #carritoProductos */
+    #carritoProductos:not(:has(:first-child))
+    {
+        padding: 5rem 0.5rem;
+    }
+
+    #carritoProductos > li {
+        max-width: unset;
+    }
+
+    #carritoBottomBar {
+        margin: 0 0.5rem;
+        padding: 0.5rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    #vaciarCarrito {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        width: 15rem;
+        margin-left: unset;
+        margin-right: unset;
+        padding: 0.5rem;
+    }
+
+    #comprarCarrito {
+        margin-top: unset;
+        margin: 2rem auto 0 auto;
+        padding: 0.5rem;
+        width: 15rem;
+    }
+
+    footer {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
